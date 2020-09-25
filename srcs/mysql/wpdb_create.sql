@@ -1,3 +1,3 @@
 CREATE DATABASE wordpress;
-GRANT ALL ON wordpress.* TO 'admin'@'localhost' IDENTIFIED BY 'admin';
+GRANT ALL ON *.* TO 'admin'@'%' IDENTIFIED BY 'admin' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
