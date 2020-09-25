@@ -5,7 +5,7 @@ LABEL maintainer=matrus
 RUN apk add mariadb mariadb-client\
 	openrc
 
-COPY my.cnf /etc/
+COPY my.cnf /etc/mysql/my.cnf
 COPY wpdb_create.sql /etc/
 COPY configure.sh /etc/
 
@@ -19,5 +19,6 @@ VOLUME ["/var/lib/mysql"]
 #	rc-service mariadb stop
 
 EXPOSE 3306
+
 
 CMD ./etc/configure.sh
