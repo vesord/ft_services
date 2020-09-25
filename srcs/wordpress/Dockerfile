@@ -10,8 +10,7 @@ RUN apk add --update nginx php7 php7-fpm php7-mysqli php7-json supervisor && \
 
 ADD wordpress-5.5.1-ru_RU.tar.gz /var/www/
 
-#COPY wp-config.php /var/www/wordpress/
-
+COPY wp-config.php /var/www/wordpress/
 COPY supervisord.conf /etc/supervisord.conf
 COPY nginx.conf /etc/nginx/
 
