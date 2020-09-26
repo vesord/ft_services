@@ -7,6 +7,7 @@ RUN apk add mariadb mariadb-client\
 
 COPY my.cnf /etc/mysql/my.cnf
 COPY wpdb_create.sql /etc/
+COPY wordpress.sql /etc/
 COPY configure.sh /etc/
 
 VOLUME ["/sys/fs/cgroup"]
