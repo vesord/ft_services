@@ -6,7 +6,7 @@
 #    By: matrus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/22 11:37:46 by matrus            #+#    #+#              #
-#    Updated: 2020/09/22 17:00:53 by matrus           ###   ########.fr        #
+#    Updated: 2020/09/29 15:02:45 by matrus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,18 +19,17 @@ RUN apk add --update nginx && \
 RUN apk add --update supervisor && \
 	rm -rf /etc/supervisord.conf
 RUN apk add --update openssh-server && \
-	echo "root:pass1234" | chpasswd
+	echo "root:root" | chpasswd
 
-#COPY script.sh/ /etc/
-COPY matrus_services.crt /etc/ssl/certs/matrus_services.crt
-COPY matrus_services.key /etc/ssl/certs/matrus_services.key
+COPY matrus_services.crt /etc/ssl/certs/
+COPY matrus_services.key /etc/ssl/certs/
 COPY index.html /var/www/default/
 COPY nginx.conf /etc/nginx/
 
-COPY supervisord.conf /etc/supervisord.conf
+COPY supervisord.conf /etc/
 
-COPY ssh_host_rsa_key.pub /etc/ssh/ssh_host_rsa_key.pub
-COPY ssh_host_rsa_key /etc/ssh/ssh_host_rsa_key
+COPY ssh_host_rsa_key.pub /etc/ssh/
+COPY ssh_host_rsa_key /etc/ssh/
 COPY sshd_config /etc/ssh/
 
 EXPOSE 80

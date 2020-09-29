@@ -5,14 +5,13 @@ metadata:
   labels:
     app: mysql
 spec:
-    #  storageClassName: mysql-pv
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
 ---
-apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+apiVersion: apps/v1 
 kind: Deployment
 metadata:
   name: mysql
@@ -29,6 +28,10 @@ spec:
       labels:
         app: mysql
     spec:
+      volumes:
+      - name: mysql-ps
+        persistentVolumeClaim:
+          claimName: mysql-pvc  
       containers:
       - image: mysql:matrus
         name: mysql

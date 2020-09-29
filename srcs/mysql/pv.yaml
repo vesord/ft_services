@@ -5,7 +5,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: mysql-ps
+#  storageClassName: mysql-ps
   capacity:
     storage: 1Gi
   accessModes:
