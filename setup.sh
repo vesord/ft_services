@@ -6,75 +6,89 @@
 #    By: matrus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/22 10:23:09 by matrus            #+#    #+#              #
-#    Updated: 2020/09/30 07:39:43 by matrus           ###   ########.fr        #
+#    Updated: 2020/09/30 11:10:38 by matrus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #!bin/sh
 
-echo "---STARTING MINIKUBE---"
-minikube start --vm-driver=virtualbox					|| (echo "---FAILED---" ; exit 1)
+function fail_exit {
+	echo_red "---FAILED---"
+	minikube delete
+	exit 1
+}
 
-echo "---ENABLING METALLB ADDON---"
-minikube addons enable metallb							|| (echo "---FAILED---" ; exit 1)
+function echo_red {
+	echo "\x1b[31;47m$1\x1b[0m"
+}
 
-echo "---APPLYING METALLB CONFIG---"
-kubectl apply -f srcs/metallb/metallb_config.yaml		|| (echo "---FAILED---" ; exit 1)
+function echo_blue {
+	echo "\x1b[34;47m$1\x1b[0m"
+}
 
-echo "---CHANGING DOCKER ENVIRONMENT---"
-eval $(minikube docker-env)								|| (echo "---FAILED---" ; exit 1)
+echo_blue "---STARTING MINIKUBE---"
+minikube start --vm-driver=virtualbox					|| fail_exit
 
+echo_blue "---ENABLING METALLB ADDON---"
+minikube addons enable metallb							|| fail_exit
 
-#echo "---BUILDING NGINX CONTAINER---"
-#docker build	-t nginx:matrus ./srcs/nginx/			|| (echo "---FAILED---" ; exit 1)
+echo_blue "---APPLYING METALLB CONFIG---"
+kubectl apply -f srcs/metallb/metallb_config.yaml		|| fail_exit
 
-#echo "---APPLYING NGINX.YAML TO KUBERNETES---"
-#kubectl apply	-f ./srcs/nginx/nginx.yaml				|| (echo "---FAILED---" ; exit 1)
-
-
-echo "---BUILDING WORDPRESS CONTAINER---"
-docker build -t wordpress:matrus ./srcs/wordpress		|| (echo "---FAILED---" ; exit 1)
-
-echo "---APPLYING WORDPRESS.YAML TO KUBERNETES---"
-kubectl apply -f ./srcs/wordpress/wordpress.yaml		|| (echo "---FAILED---" ; exit 1)
-
-
-echo "---BUILDING MYSQL CONTAINER---"
-docker build -t mysql:matrus ./srcs/mysql				|| (echo "---FAILED---" ; exit 1)
-
-echo "---APPLYING MYSQL PERSISTENT VOLUME TO KUBERNETES---"
-kubectl apply -f ./srcs/mysql/pv.yaml					|| (echo "---FAILED---" ; exit 1)
-
-echo "---APPLYING MYSQ.YAML TO KUBERNETES---"
-kubectl apply -f ./srcs/mysql/mysql.yaml				|| (echo "---FAILED---" ; exit 1)
+echo_blue "---CHANGING DOCKER ENVIRONMENT---"
+eval $(minikube docker-env)								|| fail_exit
 
 
-#echo "---BUILDING PHPMYADMIN CONTAINER---"
-#docker build -t phpmyadmin:matrus ./srcs/phpma			|| (echo "---FAILED---" ; exit 1)
+echo_blue "---BUILDING NGINX CONTAINER---"
+docker build	-t nginx:matrus ./srcs/nginx/			|| fail_exit
 
-#echo "---APPLYING PHPMYADMIN.YAML TO KUBERNETES---"
-#kubectl apply -f ./srcs/phpma/phpmyadmin.yaml			|| (echo "---FAILED---" ; exit 1)
-
-
-#echo "---BUILDING FTPS CONTAINER---"
-#docker build -t ftps:matrus ./srcs/ftps					|| (echo "---FAILED---" ; exit 1)
-
-#echo "---APPLYING FTPS.YAML TO KUBERNETES---"
-#kubectl apply -f ./srcs/ftps/ftps.yaml					|| (echo "---FAILED---" ; exit 1)
+echo_blue "---APPLYING NGINX.YAML TO KUBERNETES---"
+kubectl apply	-f ./srcs/nginx/nginx.yaml				|| fail_exit
 
 
-#echo "---BUILDING INFLUXDB CONTAINER---"
-#docker build -t influxdb:matrus ./srcs/influxdb			|| (echo "---FAILED---" ; exit 1)
+echo_blue "---BUILDING WORDPRESS CONTAINER---"
+docker build -t wordpress:matrus ./srcs/wordpress		|| fail_exit
 
-#echo "---APPLYING INFLUXDB PERSISTENT VOLUME TO KUBERNETES---"
-#kubectl apply -f ./srcs/influxdb/pv.yaml				|| (echo "---FAILED---" ; exit 1)
-
-#echo "---APPLYING INFLUXDB.YAML TO KUBERNETES---"
-#kubectl apply -f ./srcs/influxdb/influxdb.yaml			|| (echo "---FAILED---" ; exit 1)
+echo_blue "---APPLYING WORDPRESS.YAML TO KUBERNETES---"
+kubectl apply -f ./srcs/wordpress/wordpress.yaml		|| fail_exit
 
 
-#echo "---BUILDING GRAFANA CONTAINER---"
-#docker build -t grafana:matrus ./srcs/grafana			|| (echo "---FAILED---" ; exit 1)
+echo_blue "---BUILDING MYSQL CONTAINER---"
+docker build -t mysql:matrus ./srcs/mysql				|| fail_exit
 
-#echo "---APPLYING GRAFANA.YAML TO KUBERNETES---"
-#kubectl apply -f ./srcs/grafana/grafana.yaml			|| (echo "---FAILED---" ; exit 1)
+echo_blue "---APPLYING MYSQL PERSISTENT VOLUME TO KUBERNETES---"
+kubectl apply -f ./srcs/mysql/pv.yaml					|| fail_exit
+
+echo_blue "---APPLYING MYSQ.YAML TO KUBERNETES---"
+kubectl apply -f ./srcs/mysql/mysql.yaml				|| fail_exit
+
+
+echo_blue "---BUILDING PHPMYADMIN CONTAINER---"
+docker build -t phpmyadmin:matrus ./srcs/phpma			|| fail_exit
+
+echo_blue "---APPLYING PHPMYADMIN.YAML TO KUBERNETES---"
+kubectl apply -f ./srcs/phpma/phpmyadmin.yaml			|| fail_exit
+
+
+echo_blue "---BUILDING FTPS CONTAINER---"
+docker build -t ftps:matrus ./srcs/ftps					|| fail_exit
+
+echo_blue "---APPLYING FTPS.YAML TO KUBERNETES---"
+kubectl apply -f ./srcs/ftps/ftps.yaml					|| fail_exit
+
+
+echo_blue "---BUILDING INFLUXDB CONTAINER---"
+docker build -t influxdb:matrus ./srcs/influxdb			|| fail_exit
+
+echo_blue "---APPLYING INFLUXDB PERSISTENT VOLUME TO KUBERNETES---"
+kubectl apply -f ./srcs/influxdb/pv.yaml				|| fail_exit
+
+echo_blue "---APPLYING INFLUXDB.YAML TO KUBERNETES---"
+kubectl apply -f ./srcs/influxdb/influxdb.yaml			|| fail_exit
+
+
+echo_blue "---BUILDING GRAFANA CONTAINER---"
+docker build -t grafana:matrus ./srcs/grafana			|| fail_exit
+
+echo_blue "---APPLYING GRAFANA.YAML TO KUBERNETES---"
+kubectl apply -f ./srcs/grafana/grafana.yaml			|| fail_exit

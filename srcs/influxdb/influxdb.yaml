@@ -5,6 +5,7 @@ metadata:
   labels:
     app: influxdb
 spec:
+  storageClassName: influxdb-ps
   accessModes:
     - ReadWriteOnce
   resources:
