@@ -6,7 +6,7 @@
 #    By: matrus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/22 10:23:09 by matrus            #+#    #+#              #
-#    Updated: 2020/09/29 17:08:47 by matrus           ###   ########.fr        #
+#    Updated: 2020/09/30 07:39:43 by matrus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,11 +49,11 @@ echo "---APPLYING MYSQ.YAML TO KUBERNETES---"
 kubectl apply -f ./srcs/mysql/mysql.yaml				|| (echo "---FAILED---" ; exit 1)
 
 
-echo "---BUILDING PHPMYADMIN CONTAINER---"
-docker build -t phpmyadmin:matrus ./srcs/phpma			|| (echo "---FAILED---" ; exit 1)
+#echo "---BUILDING PHPMYADMIN CONTAINER---"
+#docker build -t phpmyadmin:matrus ./srcs/phpma			|| (echo "---FAILED---" ; exit 1)
 
-echo "---APPLYING PHPMYADMIN.YAML TO KUBERNETES---"
-kubectl apply -f ./srcs/phpma/phpmyadmin.yaml			|| (echo "---FAILED---" ; exit 1)
+#echo "---APPLYING PHPMYADMIN.YAML TO KUBERNETES---"
+#kubectl apply -f ./srcs/phpma/phpmyadmin.yaml			|| (echo "---FAILED---" ; exit 1)
 
 
 #echo "---BUILDING FTPS CONTAINER---"

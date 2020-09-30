@@ -73,6 +73,7 @@ $cfg['Servers'][$i]['AllowNoPassword'] = false;
  */
 $cfg['UploadDir'] = '';
 $cfg['SaveDir'] = '';
+//$cfg['TempDir'] = '/var/www/phpMyAdmin-4.9.5-all-languages/tmp'
 
 /**
  * Whether to display icons or text or both icons and text in table row

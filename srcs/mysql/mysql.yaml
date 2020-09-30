@@ -5,6 +5,7 @@ metadata:
   labels:
     app: mysql
 spec:
+  storageClassName: mysql
   accessModes:
     - ReadWriteOnce
   resources:
@@ -53,5 +54,7 @@ spec:
   type: ClusterIP
   ports:
     - port: 3306
+      targetPort: 3306
+      protocol: TCP
   selector:
     app: mysql

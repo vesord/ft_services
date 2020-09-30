@@ -11,6 +11,9 @@ RUN apk add --update nginx php7 php7-fpm php7-mysqli php7-json php7-iconv php7-m
 ADD ./phpMyAdmin-4.9.5-all-languages.tar.gz /var/www/
 
 COPY config.inc.php /var/www/phpMyAdmin-4.9.5-all-languages
+
+#RUN mkdir /var/www/phpMyAdmin-4.9.5-all-languages/tmp
+
 COPY supervisord.conf /etc/supervisord.conf
 COPY nginx.conf /etc/nginx/
 

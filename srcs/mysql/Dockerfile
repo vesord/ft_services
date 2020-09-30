@@ -1,17 +1,18 @@
-FROM alpine:3.7
+FROM alpine:latest
 
 LABEL maintainer=matrus
 
 RUN apk add mariadb mariadb-client\
 	openrc
 
+VOLUME ["/sys/fs/cgroup"]
+VOLUME ["/var/lib/mysql"]
+
 COPY my.cnf /etc/mysql/
 COPY wpdb_create.sql /etc/
 COPY wordpress.sql /etc/
 COPY configure.sh /etc/
 
-VOLUME ["/sys/fs/cgroup"]
-VOLUME ["/var/lib/mysql"]
 
 EXPOSE 3306
 
