@@ -6,7 +6,7 @@
 #    By: matrus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/22 10:23:09 by matrus            #+#    #+#              #
-#    Updated: 2020/09/30 11:10:38 by matrus           ###   ########.fr        #
+#    Updated: 2020/09/30 13:11:25 by matrus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,13 +39,6 @@ echo_blue "---CHANGING DOCKER ENVIRONMENT---"
 eval $(minikube docker-env)								|| fail_exit
 
 
-echo_blue "---BUILDING NGINX CONTAINER---"
-docker build	-t nginx:matrus ./srcs/nginx/			|| fail_exit
-
-echo_blue "---APPLYING NGINX.YAML TO KUBERNETES---"
-kubectl apply	-f ./srcs/nginx/nginx.yaml				|| fail_exit
-
-
 echo_blue "---BUILDING WORDPRESS CONTAINER---"
 docker build -t wordpress:matrus ./srcs/wordpress		|| fail_exit
 
@@ -68,6 +61,13 @@ docker build -t phpmyadmin:matrus ./srcs/phpma			|| fail_exit
 
 echo_blue "---APPLYING PHPMYADMIN.YAML TO KUBERNETES---"
 kubectl apply -f ./srcs/phpma/phpmyadmin.yaml			|| fail_exit
+
+
+echo_blue "---BUILDING NGINX CONTAINER---"
+docker build	-t nginx:matrus ./srcs/nginx/			|| fail_exit
+
+echo_blue "---APPLYING NGINX.YAML TO KUBERNETES---"
+kubectl apply	-f ./srcs/nginx/nginx.yaml				|| fail_exit
 
 
 echo_blue "---BUILDING FTPS CONTAINER---"

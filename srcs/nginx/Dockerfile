@@ -6,7 +6,7 @@
 #    By: matrus <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/22 11:37:46 by matrus            #+#    #+#              #
-#    Updated: 2020/09/29 15:02:45 by matrus           ###   ########.fr        #
+#    Updated: 2020/09/30 13:13:29 by matrus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ COPY supervisord.conf /etc/
 COPY ssh_host_rsa_key.pub /etc/ssh/
 COPY ssh_host_rsa_key /etc/ssh/
 COPY sshd_config /etc/ssh/
+RUN chmod 400 /etc/ssh/ssh_host_rsa_key
 
 EXPOSE 80
 EXPOSE 443
