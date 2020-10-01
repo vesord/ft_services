@@ -4,13 +4,12 @@ LABEL maintainer=matrus
 
 RUN apk add influxdb supervisor && \
 	apk add telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted --no-cache && \
-	mkdir -p /etc/telegraf && \
-	sh -c "/usr/bin/telegraf -sample-config --input-filter docker \
-						--output-filter influxdb > /etc/telegraf/telegraf.conf"
+	mkdir -p /etc/telegraf
 
-VOLUME ["/var/lib/influxdb"]
+VOLUME ["/root/.influxdb"]
 
-COPY supervisord.conf /etc/ 
+COPY supervisord.conf /etc/
+COPY telegraf.conf /etc/telegraf/
 
 EXPOSE 8086
 
