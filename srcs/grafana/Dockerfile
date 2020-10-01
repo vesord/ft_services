@@ -14,9 +14,10 @@ RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/s
 	apk add glibc-2.32-r0.apk
 
 COPY grafana.db /etc/grafana-7.2.0/data/
-COPY supervisord.conf /etc/supervisord.conf
 
 EXPOSE 3000
 
-CMD ["/usr/bin/supervisord"]
+WORKDIR /etc/grafana-7.2.0/bin 
+
+CMD ["./grafana-server"]
 

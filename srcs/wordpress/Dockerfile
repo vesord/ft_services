@@ -17,4 +17,4 @@ COPY nginx.conf /etc/nginx/
 
 EXPOSE 5050
 
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

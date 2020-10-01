@@ -14,10 +14,10 @@ COPY config.inc.php /var/www/phpMyAdmin-4.9.5-all-languages
 
 #RUN mkdir /var/www/phpMyAdmin-4.9.5-all-languages/tmp
 
-COPY supervisord.conf /etc/supervisord.conf
+COPY supervisord.conf /etc/
 COPY nginx.conf /etc/nginx/
 
 EXPOSE 5000
 
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
 
