@@ -25,54 +25,54 @@ Cluster contains the following services:
 A Nginx server listening on ports 80 and 443. Port 80 has a systematic redirection of type 301 to 443, which https. 
 The page displayed is just my sample page (learning project you know:D ).
 
-IP: 192.168.99.242:80
+* IP: 192.168.99.242:80
 
-IP: IP: 192.168.99.242:443
+* IP: 192.168.99.242:443
 
 Also you can access Nginx service via SSH.
 
-IP: 192.168.99.242:22
+*  IP: 192.168.99.242:22
 
-Login: root/root
+*  Login: root/root
 
 
 #### FTPS server
 A FTPS server listening port 21.
-IP: 192.168.99.247:21
-Login: root/root
+* IP: 192.168.99.247:21
+* Login: root/root
 
 #### MySQL database
 Database for keeping tables of Wordpress and PhpMyAdmin (see bellow)
 
-IP: no external acceess
+* IP: no external acceess
 
 #### WordPress
 A WordPress website listening on port 5050, which is working with a MySQL database.
 The WordPress website has several users and an administrator.
 
-IP: 192.168.99.240:5050
+* IP: 192.168.99.240:5050
 
-Login: matrus/matrus
+* Login: matrus/matrus
 
 #### PhpMyAdmin
 A PhpMyAdmin linked with MySQL
 
-IP: 192.168.99.241:5000
+* IP: 192.168.99.241:5000
 
-Login: admin/admin
+* Login: admin/admin
 
 ### InfluxDB and Telegraf
 Database and it's service to monitore all the containers in the cluster.
 
-IP: no external access
+* IP: no external access
 
 #### Grafana
 Grafana platform, listening on port 3000, linked with an InfluxDB database.
 Grafana is monitoring all the containers. There'are one dashboard per service.
 
-IP: 192.168.99.243:3000
+* IP: 192.168.99.243:3000
 
-Login: admin/admin
+* Login: admin/admin
 
 ## Issues
 
