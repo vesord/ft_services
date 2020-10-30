@@ -61,7 +61,7 @@ A PhpMyAdmin linked with MySQL
 
 * Login: admin/admin
 
-### InfluxDB and Telegraf
+#### InfluxDB and Telegraf
 Database and it's service to monitore all the containers in the cluster.
 
 * IP: no external access
@@ -80,5 +80,13 @@ In case of crush of `setup.sh` just relaunch it. Bad stuff happens.
 
 In case of bad IP adresses in README check them out in Dashboard.
 
-## Some screenshots for those who dont have an idea what is this
+# Some screenshots for those who dont have an idea what is this
 
+## Dashboard
+![Dashboard view](/extra/dashboard.png)
+
+## WordPress website
+![WordPress view](/extra/wordpress.png)
+
+## Grafana platform
+![Grafana view](/extra/grafana.png)
